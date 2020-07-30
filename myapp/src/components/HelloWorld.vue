@@ -3,6 +3,7 @@
     <h1>{{ msg }}</h1>
     <b-container>
       <b-alert show variant="primary">Bootstrap Vue</b-alert>
+      <b-table striped hover :items="users"></b-table>
     </b-container>
   </div>
 </template>
@@ -12,6 +13,17 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      users: []
+    }
+  },
+  mounted() {
+    this.$axios.get('http://localhost:3000/users')
+    .then((res) => {
+      this.users = res.data
+      })
   }
 }
 </script>
